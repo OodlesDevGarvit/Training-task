@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { useSelector } from "react-redux";
 
 const Userlist = ({ navigation }) => {
-    const userinfo = useSelector(state => state.user);
+    const userinfo = useSelector(state => state.user.users);
     console.log('saved user info from redux', userinfo);
     // console.log('information',userinfo.data[0].deviceid);
 
