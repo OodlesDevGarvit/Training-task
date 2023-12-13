@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { useSelector } from "react-redux";
 
-const Userlist = ({navigation}) => {
+const Userlist = ({ navigation }) => {
     const userinfo = useSelector(state => state.user);
     console.log('saved user info from redux', userinfo);
     // console.log('information',userinfo.data[0].deviceid);
@@ -42,17 +42,17 @@ const Userlist = ({navigation}) => {
 
         // </View>
 
-        <View style={{padding:10, flex:1, color:'black'}}>
+        <View style={{ padding: 10, flex: 1, color: 'black' }}>
             {userinfo.map((userData, index) => (
                 <View key={index}>
-                      <View>
-                        <Text>{userData.data.photo}</Text>
-                    </View>  
+                    <View>
+                        <Text>{userData?.photo}</Text>
+                    </View>
 
                     <View>
-                        <Text> Device id: {userData.data.deviceid}</Text>
-                        <Text> lat: {userData.data.lat}</Text>
-                        <Text> long: {userData.data.long}</Text>
+                        <Text> Device id: {userData.deviceid}</Text>
+                        <Text> lat: {userData.lat}</Text>
+                        <Text> long: {userData.long}</Text>
                     </View>
                 </View>
             ))}

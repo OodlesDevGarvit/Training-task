@@ -25,10 +25,11 @@ const UserInformation = (props) => {
 
     const [cameraphoto, setCameraphoto] = useState();
     const [galleryphoto, setGalleryphoto] = useState();
+    const [selectedImage, setSelectedImage] = useState("http://image.tmdb.org/t/p/w154/wunUnz175JuZJPOXFKV16Ru1bZr.jpg")
     const [showmodal, setShowmodal] = useState(false);
     const [deviceid, setDeviceId] = useState("");
     const [location, setLocation] = useState({ latitude: null, longitude: null });
-    const { width, height } = Dimensions.get('window');
+    // const { width, height } = Dimensions.get('window');
 
     // const userInformation = useSelector(state => state.user);
     // console.log("saved user info redux : ", userInformation)
@@ -49,6 +50,7 @@ const UserInformation = (props) => {
                 const result = await launchCamera(options);
                 console.log(result);
                 setCameraphoto(result.assets[0].uri);
+                setSelectedImage(result.assets[0].uri)
             }
         } catch (error) {
             console.log('Error in opening a Camera', error);
@@ -63,6 +65,7 @@ const UserInformation = (props) => {
             console.log(result);
             setGalleryphoto(result.assets[0].uri);
             console.log('value of img', result.assets[0].uri);
+            setSelectedImage(result.assets[0].uri)
         } catch (error) {
             console.log('Error in open Gallery');
         }
@@ -183,7 +186,9 @@ const UserInformation = (props) => {
 
                 <TouchableOpacity onPress={openModal} >
                     <Image
-                        source={require('../assets/cloudimg.jpeg')}
+                        source={{
+                            uri: selectedImage
+                        }}
                         style={styles.circularImage}
                     />
                 </TouchableOpacity>
@@ -268,7 +273,7 @@ const UserInformation = (props) => {
                     value={deviceid}
                 />
 
-            </View> 
+            </View>
 
             <View style={styles.latView}>
 
@@ -283,7 +288,7 @@ const UserInformation = (props) => {
             </View>
 
 
-             <View style={styles.longView}>
+            <View style={styles.longView}>
 
                 <Text style={{ fontSize: 30 }}>Long:</Text>
 
@@ -295,7 +300,7 @@ const UserInformation = (props) => {
 
             </View>
 
-{/*  */}
+            {/*  */}
 
             <TouchableOpacity
                 style={styles.saveButton}
@@ -312,7 +317,7 @@ const UserInformation = (props) => {
 }
 const styles = StyleSheet.create({
     container: {
-         flex: 1,
+        flex: 1,
         // height: heightPercentageToDP('100%'),
         // justifyContent: 'center',
         // alignItems: 'center',
